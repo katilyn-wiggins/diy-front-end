@@ -22,9 +22,10 @@ export default class Search extends Component {
         this.setState({loading: true});
 
         const data=await request.get(`https://tranquil-reaches-22835.herokuapp.com/jewelry`)
+        console.log(data);
         this.setState({
             loading: false,
-            jewelry: data.body.results,
+            jewelry: data.body,
         });
     }
 
