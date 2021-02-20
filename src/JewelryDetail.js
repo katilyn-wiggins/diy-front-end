@@ -10,12 +10,12 @@ export default class Detail extends Component {
 
         this.setState({loading: true});
 
-        const data=await request.get(`https://tranquil-reaches-22835.herokuapp.com/jewelry=${this.props.match.params.id}`);
-
+        const data=await request.get(`https://tranquil-reaches-22835.herokuapp.com/jewelry/${this.props.match.params.id}`);
+        console.log(data);
         this.setState({
             loading: false,
 
-            jewelry: data.body.results.find(jewel => jewel.id===this.props.match.params.id),
+            jewelry: data.body[0],
 
         });
 
@@ -23,22 +23,20 @@ export default class Detail extends Component {
 
     render() {
 
-
         return (
             <div>
                 {
                     this.state.loading
                         ? <Spinner />
                         :<div className="jewelry-detail-page">
-                            <div className="jewelry-detail-name">{this.state.jewelry.id} </div>
+                            <div className="jewelry-detail-name">{this.state.jewelry.name} </div>
 
-                            <img className="jewelry-detail-img" alt="jewelry" src={this.state.jewlery.image}></img>
+                            <img className="jewelry-detail-img" alt="jewelry" src={this.state.jewelry.image}></img>
                             <div className="jewelry-detail-text-content">
-                                <div>name: {this.state.jewelry.name}</div>
                                 <div>description: {this.state.jewelry.description} </div>
                                 <div>price: {this.state.jewelry.price} </div>
                                 <div>category: {this.state.jewelry.category} </div>
-                                <div>contains silver: {this.state.jewelry.made_of_silver} </div>
+                                <div>contains silver: true {this.state.jewelry.made_of_silver? true:"true"? false:"false"} </div>
                             </div>
                         </div>
                 }

@@ -26,7 +26,7 @@ export default class App extends React.Component {
               render={(routerProps) => <Jewelry {...routerProps} />}
             />
             <Route
-              path="/search/:id"
+              path="/jewelry/:id"
               exact
               render={(routerProps) => <Detail {...routerProps} />}
             />
