@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import JewelryList from './JewelryList.js';
 import request from 'superagent';
 import Spinner from './Spinner.js'
@@ -7,21 +7,21 @@ import Spinner from './Spinner.js'
 
 
 export default class Search extends Component {
-    state = {
+    state={
         jewelry: [],
         loading: false,
     }
 
-    componentDidMount = async () => {
+    componentDidMount=async () => {
         await this.getJewelry();
     }
 
 
-    getJewelry = async () => {
+    getJewelry=async () => {
 
-        this.setState({ loading: true });
+        this.setState({loading: true});
 
-        const data = await request.get(`https://katilyn-fullstack-project.herokuapp.com/jewelry`)
+        const data=await request.get(`https://tranquil-reaches-22835.herokuapp.com/jewelry`)
         this.setState({
             loading: false,
             jewelry: data.body.results,
@@ -39,7 +39,7 @@ export default class Search extends Component {
                 {
                     this.state.loading
                         ? <Spinner />
-                        : <JewelryList jewelry={this.state.jewelry} />
+                        :<JewelryList jewelry={this.state.jewelry} />
 
                 }
 
