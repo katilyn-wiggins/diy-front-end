@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import Home from './Home.js';
 import './App.css';
+import Jewelry from './Jewelry.js'
+import Detail from './JewelryDetail.js';
+import Header from './Header.js';
+import Create from './Create.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+export default class App extends React.Component {
+  render () {
+    return (
+      <div>
+        <Router>
+          <Header />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={(routerProps) => <Home {...routerProps} />}
+            />
+            <Route
+              path="/jewelry"
+              exact
+              render={(routerProps) => <Jewelry {...routerProps} />}
+            />
+            <Route
+              path="/jewelry/:id"
+              exact
+              render={(routerProps) => <Detail {...routerProps} />}
+            />
+            <Route
+              path="/create"
+              exact
+              render={(routerProps) => <Create {...routerProps} />}
+            />
+          </Switch>
+        </Router>
+        <footer>
+        </footer>
+      </div>
+
+    );
+  }
 }
 
-export default App;
+
+
