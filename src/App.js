@@ -5,15 +5,19 @@ import {
   Switch,
 } from 'react-router-dom';
 import Home from './Home.js';
+import './App.css';
 import Jewelry from './Jewelry.js'
 import Detail from './JewelryDetail.js';
+import Header from './Header.js';
+import Create from './Create.js';
 
 
 export default class App extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <Router>
+          <Header />
           <Switch>
             <Route
               path="/"
@@ -29,6 +33,11 @@ export default class App extends React.Component {
               path="/jewelry/:id"
               exact
               render={(routerProps) => <Detail {...routerProps} />}
+            />
+            <Route
+              path="/create"
+              exact
+              render={(routerProps) => <Create {...routerProps} />}
             />
           </Switch>
         </Router>

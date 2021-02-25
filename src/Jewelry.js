@@ -1,36 +1,32 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {getJewelry} from './api-utils';
 import JewelryList from './JewelryList.js';
-import request from 'superagent';
 import Spinner from './Spinner.js'
 
 // import Dropdown from './Dropdown.js';
 
 
 export default class Search extends Component {
-    state={
+    state = {
         jewelry: [],
-        loading: false,
+        loading: false
     }
 
-    componentDidMount=async () => {
-        await this.getJewelry();
-    }
-
-
-    getJewelry=async () => {
-
-        this.setState({loading: true});
-
-        const data=await request.get(`https://tranquil-reaches-22835.herokuapp.com/jewelry`)
+    componentDidMount = async () => {
         this.setState({
-            loading: false,
-            jewelry: data.body,
+            loading: true,
         });
+
+
+        const jewelry = await getJewelry();
+
+        this.setState({
+            jewelry: jewelry,
+            loading: false
+        })
     }
 
-
-
-    render() {
+    render () {
 
         return (
             <div className="body">
@@ -39,7 +35,7 @@ export default class Search extends Component {
                 {
                     this.state.loading
                         ? <Spinner />
-                        :<JewelryList jewelry={this.state.jewelry} />
+                        : <JewelryList jewelry={this.state.jewelry} />
 
                 }
 
